@@ -1,4 +1,4 @@
-from timeinterval import TimeInterval
+from .timeinterval import TimeInterval
 import datetime
 
 class Task:
@@ -134,3 +134,40 @@ class Task:
                 return last.ended
             else:
                 return datetime.datetime.now()
+
+    def prettyprint(self):
+        """Print information about a task to the console."""
+
+        # helper method to print a useful representation of duration
+        def length_format(delta):
+            SECS_PER_HOUR = 60 * 60
+            SECS_PER_MINUTE = 60
+            hours, remainder = divmod(delta.seconds, SECS_PER_HOUR)
+            minutes, seconds = divmod(remainder, SECS_PER_MINUTE)
+            
+            fmt = "{0}:{1:02d}:{2:02d}s".format(hours, minutes, seconds)
+            if delta.days > 0:
+                fmt = str(delta.days) + " days " + fmt
+
+            return fmt
+
+        # helper method - print appropriate info depending on whether task
+        # is active, paused, or ended
+        def end_string():
+            if self.isended():
+                return "Ended " + str(self.lastworked().date())
+            elif self.ispaused():
+                return "Paused " + self.lastworked().strftime("%m-%d %H:%M")
+            else:
+                return "Currently working"
+
+        def start_and_end():
+            if self.isstarted():
+                return "Started {0}, {1}, Duration {2}".format(
+                    self.starttime().strftime("%Y-%m-%d %H:%M"),
+                    end_string(),
+                    length_format(self.length()))
+            else:
+                return "Not started yet" 
+
+        return "{0}: {1}".format(self.name(), start_and_end())

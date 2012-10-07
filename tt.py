@@ -1,6 +1,6 @@
 import sys
 import os
-import timetracker.cli
+import timetracker
 
 # Utility function, cross platform - from Douglas Mayle
 def app_folder():
@@ -17,6 +17,6 @@ def app_folder():
 # main
 
 print #blank line
-cli = timetracker.cli.Cli(app_folder())
+cli = timetracker.CLI(app_folder())
 cli.parse_command(sys.argv[1:])
 cli.store()

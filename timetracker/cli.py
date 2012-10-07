@@ -1,18 +1,20 @@
 import argparse
-from tasklist import TaskList
+from .tasklist import TaskList
 import os
+import pickle
 
-class Cli:
+class CLI:
     def __init__(self, location):
         
         self.location = location
-        
-        self.tasklist = TaskList()
         try:
-            self.tasklist.load(self.location)
+            task_dict = pickle.load(open(location, 'rb'))
         except:
             # if fails, assume there's no data stored and start fresh
-            print "Creating a new task file."
+            print("Creating a new task file.")
+            task_dict = {}
+        
+        self.tasklist = TaskList(task_dict)
         
         self.parser = argparse.ArgumentParser(description='Tracks time spent on different tasks.')
     
@@ -76,14 +78,11 @@ class Cli:
         erase_parser.set_defaults(func = lambda args: self.erase_taskfile())
 
     def store(self):
-        self.tasklist.store(self.location)
+        pickle.dump(self.tasklist.tasks, open(self.location, 'wb'))
 
     def parse_command(self, args):
         args = self.parser.parse_args(args)
-        try:
-            args.func(args)
-        except Exception as ex:
-            print ex
+        args.func(args)
     
     def erase_taskfile(self):
         intext = input("Deleting ALL tasks. Are you sure? y/n")
