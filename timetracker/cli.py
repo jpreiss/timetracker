@@ -49,6 +49,15 @@ class CLI:
         unend_parser.add_argument('name', help='Task name')
         unend_parser.set_defaults(func = lambda args: self.tasklist.unend(args.name))
 
+        #reset
+        reset_parser = subparsers.add_parser('reset', help='Reset task')
+        reset_parser.add_argument('name', help='Task name')
+        reset_parser.set_defaults(func = lambda args: self.tasklist.reset(args.name))
+
+        #reset all
+        resetall_parser = subparsers.add_parser('resetall', help='Reset all tasks')
+        resetall_parser.set_defaults(func = lambda args: self.tasklist.reset_all())
+
         #delete
         delete_parser = subparsers.add_parser('delete', help='Delete task')
         delete_parser.add_argument('name', help='Task name')

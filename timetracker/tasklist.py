@@ -17,13 +17,16 @@ class TaskList:
     
     def start(self, name):
         """Start or unpause a task, while pausing all other tasks.
-        Raises a KeyError if the task name is not found.
+        If task is not found, creates it.
         """
-        self.tasks[name].start()
-        
+        if not name in self.tasks:
+            self.add(name)
+
         for taskname, task in self.tasks.items():
             if taskname != name:
                 task.pause()
+
+        self.tasks[name].start()
         
     
     def pause(self, name):
@@ -83,3 +86,14 @@ class TaskList:
         Raises a KeyError if the task name is not found.
         """
         print(self.tasks[taskname].prettyprint())
+
+    def reset(self, name):
+        """Reset a task to unstarted with 0 time logged."""
+        if name in self.tasks:
+            self.delete(name)
+            self.add(name)
+
+    def reset_all(self):
+        """Resets all tasks to unstarted with 0 time logged."""
+        for name in self.tasks.keys():
+            self.reset(name)
