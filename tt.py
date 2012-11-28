@@ -3,6 +3,8 @@ import os
 import timetracker
 
 # Utility function, cross platform - from Douglas Mayle
+# returns the path to the TimeTracker directory
+# inside the OS's standard location for application data
 def app_folder():
     APPNAME = "TimeTracker1.0"
     if sys.platform == 'darwin':

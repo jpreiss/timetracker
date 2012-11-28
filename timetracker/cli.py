@@ -21,56 +21,56 @@ class CLI:
         subparsers = self.parser.add_subparsers(title='commands')
         
         #add task
-        add_parser = subparsers.add_parser('a', help='Add task')
+        add_parser = subparsers.add_parser('add', help='Add task')
         add_parser.add_argument('name', help='Task name')
         add_parser.set_defaults(func = lambda args: self.tasklist.add(args.name))
         
         #start
-        start_parser = subparsers.add_parser('s', help='Start task')
+        start_parser = subparsers.add_parser('start', help='Start task')
         start_parser.add_argument('name', help='Task name')
         start_parser.set_defaults(func = lambda args: self.tasklist.start(args.name))
         
         #pause
-        pause_parser = subparsers.add_parser('p', help='Pause task')
+        pause_parser = subparsers.add_parser('pause', help='Pause task')
         pause_parser.add_argument('name', help='Task name')
         pause_parser.set_defaults(func = lambda args: self.tasklist.pause(args.name))
         
         #pause all
-        pauseall_parser = subparsers.add_parser('pa', help='Pause all tasks')
+        pauseall_parser = subparsers.add_parser('pauseall', help='Pause all tasks')
         pauseall_parser.set_defaults(func = lambda args: self.tasklist.pause_all())
         
         #end
-        end_parser = subparsers.add_parser('e', help='End task')
+        end_parser = subparsers.add_parser('end', help='End task')
         end_parser.add_argument('name', help='Task name')
         end_parser.set_defaults(func = lambda args: self.tasklist.end(args.name))
         
         #unend
-        unend_parser = subparsers.add_parser('u', help='Unend task')
+        unend_parser = subparsers.add_parser('unend', help='Unend task')
         unend_parser.add_argument('name', help='Task name')
         unend_parser.set_defaults(func = lambda args: self.tasklist.unend(args.name))
 
         #delete
-        delete_parser = subparsers.add_parser('d', help='Delete task')
+        delete_parser = subparsers.add_parser('delete', help='Delete task')
         delete_parser.add_argument('name', help='Task name')
         delete_parser.set_defaults(func = lambda args: self.tasklist.delete(args.name))
         
         #rename
-        rename_parser = subparsers.add_parser('r', help='Rename task')
+        rename_parser = subparsers.add_parser('rename', help='Rename task')
         rename_parser.add_argument('name', help='Task name')
         rename_parser.add_argument('newname', help='New name')
         rename_parser.set_defaults(func = lambda args: self.tasklist.rename(args.name, args.newname))
         
         #query
-        query_parser = subparsers.add_parser('q', help='Query task')
+        query_parser = subparsers.add_parser('query', help='Query task')
         query_parser.add_argument('name', help='Task name')
         query_parser.set_defaults(func = lambda args: self.tasklist.query(args.name))
         
         #list
-        list_parser = subparsers.add_parser('l', help='List tasks')
+        list_parser = subparsers.add_parser('list', help='List tasks')
         list_parser.set_defaults(func = lambda args: self.tasklist.print_all())
         
         #list active
-        listactive_parser = subparsers.add_parser('la', help='List active tasks')
+        listactive_parser = subparsers.add_parser('listactive', help='List active tasks')
         listactive_parser.set_defaults(func = lambda args: self.tasklist.print_active())
         
         #erase file
