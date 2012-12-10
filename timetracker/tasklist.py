@@ -70,7 +70,8 @@ class TaskList:
     
     def print_all(self):
         """Print information about all tasks to the console."""
-        for task in self.tasks.values():
+        #TODO: columnize
+        for name, task in sorted(self.tasks.items()):
             print(task.prettyprint())
         print #blank line
     
