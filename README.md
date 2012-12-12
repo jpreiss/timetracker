@@ -3,6 +3,7 @@ timetracker
 
 Simple command-line utility for keeping track of time spent on different tasks.
 
-Functions: create/delete tasks, start/pause/end tasks, list running tasks.
+Included: create/delete, start/pause/end, list running tasks.
+Not Included: retroactively add or remove time from a task.
 
 run `tt -h` for a complete list of commands.
