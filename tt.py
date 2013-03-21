@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import os
 import timetracker
@@ -13,7 +15,7 @@ def app_folder():
     elif sys.platform == 'win32':
         return os.path.join(os.environ['APPDATA'], APPNAME)
     else:
-        return os.path.expanduser(path.join("~", "." + APPNAME))
+        return os.path.expanduser(os.path.join("~", "." + APPNAME))
 
 
 # main
